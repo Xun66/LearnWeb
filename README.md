@@ -6,23 +6,24 @@
 　　这个脚本的初衷即是为了解决这个问题，将文件的检查、下载、归档自动化完成，只需要在需要令文件保持最新时双击同步快捷方式，十几秒后，你的文件夹中就已经获得了全部课程的最新文件。
 
 ## 更新日志
-v1.0    
-新增 读取课程列表  
-新增 下载课程文件  
-新增 本地目录化同步  
-新增 自动跳过大文件的功能    
-
-v1.1  
-新增 将运行平台从macOS转换到Windows中文版(gbk系统编码)   
+v1.3  
+修复 遇到新版学堂的课程导致崩溃的问题  
+新增 可以识别并跳过新版学堂，但暂时未添加支持  
 
 v1.2  
 新增 添加代码内自动下载依赖库的功能  
 新增 网络状况较差时输出提示信息  
-新增 登陆成功输出问候语
+新增 登陆成功输出问候语  
 
-v1.3  
-修复 遇到新版学堂的课程导致崩溃的问题  
-新增 可以识别并跳过新版学堂，但暂时未添加支持  
+v1.1  
+新增 将运行平台从macOS转换到Windows中文版(gbk系统编码)  
+
+v1.0  
+新增 读取课程列表  
+新增 下载课程文件  
+新增 本地目录化同步  
+新增 自动跳过大文件的功能  
+
 
 ## 已知问题
 1. 新版学堂尚不支持，目前会自动跳过相应课程
@@ -40,3 +41,12 @@ v1.3
 6. 增加独立的配置文件或者配置交互逻辑，修改配置可不修改源码
 7. 增加公告和未交作业的读取
 8. 未交作业的DDL自动添加到Exchange日历(或每日发送Summery到指定邮箱)，需要服务器端程序
+
+## 文件清单
+Title|Digest|Comments
+|----|----|----|----|
+lib/lib/requests-2.18.4|Library Dependencies|requests-2.18.4
+SyncNow.cmd|Launch Sync, also use as console output.|fix some problem with some path that includes space
+lw.py|Script entrance file|
+sysass.py|Some tools specially in Windows|
+……|
