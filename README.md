@@ -44,7 +44,7 @@ v1.0
 
 ## 文件清单
 Title|Digest|Comments
-|----|----|----|----|
+|----|----|----|
 lib/lib/requests-2.18.4|Library Dependencies|requests-2.18.4
 SyncNow.cmd|Launch Sync, also use as console output.|fix some problem with some path that includes space
 lw.py|Script entrance file|
