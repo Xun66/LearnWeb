@@ -1,10 +1,11 @@
 ## -*- coding:gbk -*-
-# Sep 13, 2017
-Version = '1.3'
+# Mar 23, 2018
+Version = '1.4'
 # Author: ZhuangTao, tzzdjy@hotmail.com
 # Platform: Windows - ZH_CN only, must have access to 'learn.tsinghua.edu.cn'
 # Dependencies: requests_2.18.4+ - https://pypi.python.org/pypi/requests#downloads, requests-x.xx.x.tar.gz,
 #   and run "setup.py install"
+# A simple script to help sort LearnWeb files in my PC, developed with free time
 
 import re, json, os, sys, getpass, datetime, sysass  #, requests
 
@@ -104,9 +105,15 @@ def get_file_info(url_raw, t_cookies):
     r = requests.head(url_raw, headers={'Cookie': t_cookies})
     # print r.headers
     # print '.',
-    t = re.findall(r'attachment;filename="(.*)"', r.headers['Content-Disposition'])[0]
-    s = r.headers['Content-Length']
-    return (t.decode('gbk'), s)  # change:.encode('utf8')
+    if 'Content-Disposition' in r.headers:
+        #print r.headers
+        #print '.',
+        t = re.findall(r'attachment;filename="(.*)"', r.headers['Content-Disposition'])[0]
+        s = r.headers['Content-Length']
+        return (t.decode('gbk'), s)  # change:.encode('utf8')
+    else:
+        return 'ERR_FILE_ERROR'
+
 
 
 def get_course_detail(course):
@@ -152,7 +159,12 @@ def get_course_detail(course):
             tTouple = ()
             for k in range(patt.__len__()):
                 tTouple += (res[k][j],)
-            tTouple += get_file_info(host + tTouple[2], course_cookie)
+
+            file_info = get_file_info(host + tTouple[2], course_cookie)
+            if file_info == 'ERR_FILE_ERROR':
+                print tTouple[1], " ：状态异常跳过"
+                continue
+            tTouple += file_info
             tListInOneFolder.append(tTouple)
         folder.append(tListInOneFolder)
         # print 'Retrived', tListInOneFolder.__len__(), 'file in folder', folder_i
